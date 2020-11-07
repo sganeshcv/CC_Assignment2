@@ -1,0 +1,39 @@
+<!Doctype html>
+<html>
+<style>
+.btn-group button {
+  background-color: #4CAF50;
+  border: 1px solid green;
+  color: white; 
+  padding: 10px 24px; 
+  cursor: pointer; 
+  float: left;
+}
+
+.btn-group:after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none;
+}
+
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+</style>
+<body>
+
+<h1>Welcome Admin</h1>
+
+<div class="btn-group" style="width:100%">
+    <a href="/create"><button style="width:50%" name="page" type="submit">Create</button></a>
+    <a href="/listall"><button style="width:50%" name="page" type="submit">List All</button></a>
+</div>
+
+
+</body>
+</html>
+

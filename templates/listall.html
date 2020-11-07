@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
+</head>
+<body>
+
+<table id="customers">
+  <tr>
+    <th>Image Details</th>
+    <th>Options</th>
+  </tr>
+    {% for i in data %}
+  		<tr>
+        <td>
+          {% for key in i.keys() %}
+            {% if key != "_id" %}
+              {{ key + ": " + i[key] }}</br>
+            {% endif %}
+          {% endfor %}
+        </td>
+        <td>
+          <a href="./remove?_id={{ i['_id'] }}"><button type="submit">DELETE</button></a>
+        </td>
+  		</tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
