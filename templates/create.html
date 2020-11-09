@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><title>Create</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body {font-family: Arial, Helvetica, sans-serif;}
@@ -46,7 +46,7 @@ input[type=submit]:hover {
 <h3>Create an Entry</h3>
 
 <div class="container">
-<form action="/create" method="POST"><div style="margin:0;padding:0">
+<form action="/create" method="POST" enctype="multipart/form-data"><div style="margin:0;padding:0">
   <div>
     <label for="username">Name</label>
     <input id="image_name" name="image_name" size="30" type="text"/>
@@ -71,6 +71,10 @@ input[type=submit]:hover {
 
     <label for="name">Value</label>
     <input id="value3" name="value3" size="30" type="text" />
+  </div>
+  <div>
+    <label for="img">Select image:</label>
+    <input type="file" id="img" name="img" accept="image/*">
   </div>
   </div>
   <div><button class="button button2" style="width:100%" type = "submit">Submit</button>

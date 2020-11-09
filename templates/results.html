@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Results</title>
+<style>
+
+td{
+    border:black thin solid;
+    max-width:50%;
+    width:50%;
+}
+table{
+    width:100%;
+}
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #4CAF50;
+  color: white;
+}
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: auto;
+}
+</style>
+</head>
+<body>
+
+<table id="customers">
+  <tr>
+    <th>Image Results</th>
+    <th>Proprties</th>
+  </tr>
+    {% for i in data %}
+  		<tr>
+        <td>
+            <img src=" {{ url_for('static',filename = i.get('name')) }} "/>
+        </td>
+        <td>
+            {% for key in i.keys() %}
+                {% if key != "_id" %}
+                    {{ key + ": " + i[key] }}</br>
+                {% endif %}
+            {% endfor %}
+        </td>
+  		</tr>
+    {% endfor %}
+</table>
+</body>
+</html>
