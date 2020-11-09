@@ -1,8 +1,8 @@
-from flask import Flask, render_template,request,redirect,url_for 
+from flask import Flask,render_template,request,redirect,url_for 
 from pymongo import MongoClient
 from bson import ObjectId
 from flask_login import login_required, current_user, login_user, logout_user
-
+from models import login, UserModel
 # config system
 app = Flask(__name__)
 app.config.update(dict(SECRET_KEY='yoursecretkey'))
@@ -10,11 +10,13 @@ client = MongoClient('localhost:27017')
 db = client.Image
 
 login.init_app(app)
-login.login_view = 'login'
+login.login_view = 'loginPage'
 
 @app.route("/create", methods = ['POST'])
 @login_required
 def create():
+    if not current_user.is_authenticated:
+        return render_template('loginPage.html')
     image_name=request.values.get("image_name")  
     key1=request.values.get("key1")
     value1=request.values.get("value1")
@@ -29,13 +31,10 @@ def create():
 @app.route("/create", methods = ['GET'])
 @login_required
 def createGET():
-    return render_template('create.html')
+    if not current_user.is_authenticated:
+        return render_template('loginPage.html')
 
-# @app.route("/redirectPage", methods = ['GET', 'POST'])
-# def redirectPage():
-#     page = request.values.get("page")
-#     print(page)
-#     return render_template(page)
+    return render_template('create.html')
 
 @app.route("/search", methods = ['GET', 'POST'])
 def search():
@@ -54,18 +53,23 @@ def authenticate():
     uname=request.values.get("uname")  
     psw=request.values.get("psw")
     userType=request.values.get("userType")
-    
-    if(userType == "admin" and uname == "root" and psw == "root"):
+    user = UserModel(uname,psw)
+    if(psw == "root" and uname == "root"):
+        login_user(user)
         return render_template('adminHome.html')
 
-    elif(userType == "guest" and uname == "guest" and psw == "guest"):
-        return render_template('searchPage.html')
+    # elif(userType == "guest" and uname == "guest" and psw == "guest"):
+    #     return render_template('searchPage.html')
 
     return render_template('error.html')
 
 @app.route("/")
-def login():
+def loginPage():
     return render_template('loginPage.html')
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    logout_user()
 
 @app.route("/remove")
 @login_required  
@@ -77,7 +81,10 @@ def remove ():
 
 
 @app.route("/listall", methods = ['GET', 'POST'])
+@login_required
 def listall():
+    if not current_user.is_authenticated:
+        return render_template('loginPage.html')
     docs = db.ImageEntry.find()
     data = []
     for i in docs:

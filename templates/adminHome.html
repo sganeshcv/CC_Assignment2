@@ -10,6 +10,17 @@
   float: left;
 }
 
+.button5 {
+  padding: 10px;
+  border-radius: 50%;
+  background-color: #008CBA;
+  font-size: 20px;
+  display: inline-block;
+  margin: 4px;
+  float:right;
+  text-align: center;
+}
+
 .btn-group:after {
   content: "";
   clear: both;
@@ -26,12 +37,13 @@
 </style>
 <body>
 
-<h1>Welcome Admin</h1>
+<h1>Welcome Admin <a href="/logout"><button class="button5" style="width:10%" name="page" type="submit">Logout</button></a></h1>
 
 <div class="btn-group" style="width:100%">
     <a href="/create"><button style="width:50%" name="page" type="submit">Create</button></a>
     <a href="/listall"><button style="width:50%" name="page" type="submit">List All</button></a>
 </div>
+</br>
 
 
 </body>
