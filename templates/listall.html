@@ -8,6 +8,14 @@
   width: 100%;
 }
 
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 35%;
+  height: auto;
+}
+
 #customers td, #customers th {
   border: 1px solid #ddd;
   padding: 8px;
@@ -30,15 +38,19 @@
 
 <table id="customers">
   <tr>
-    <th>Image Details</th>
+    <th>Image</th>
+    <th>Details</th>
     <th>Options</th>
   </tr>
     {% for i in data %}
   		<tr>
         <td>
+          <img src=" {{ url_for('static',filename = i.get('name')) }} "/>
+      </td>
+        <td>
           {% for key in i.keys() %}
             {% if key != "_id" %}
-              {{ key + ": " + i[key] }}</br>
+            {{ ("{}: {}").format(key,i[key]) }}</br>
             {% endif %}
           {% endfor %}
         </td>

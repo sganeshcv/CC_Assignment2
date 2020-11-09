@@ -36,9 +36,6 @@ table{
   color: white;
 }
 img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
   width: 50%;
   height: auto;
 }
@@ -59,7 +56,7 @@ img {
         <td>
             {% for key in i.keys() %}
                 {% if key != "_id" %}
-                    {{ key + ": " + i[key] }}</br>
+                {{ ("{}: {}").format(key,i[key]) }}</br>
                 {% endif %}
             {% endfor %}
         </td>

@@ -32,10 +32,16 @@ def create():
     image_name=request.values.get("image_name")  
     key1=request.values.get("key1")
     value1=request.values.get("value1")
+    if(request.values.get("dataType1") == "double"):
+        value1 = float(value1)
     key2=request.values.get("key2")
     value2=request.values.get("value2")
+    if(request.values.get("dataType2") == "double"):
+        value2 = float(value2)
     key3=request.values.get("key3")
     value3=request.values.get("value3")
+    if(request.values.get("dataType3") == "double"):
+        value3 = float(value3)
 
     target = os.path.join(APP_ROOT,'images/')
     if not os.path.isdir(target):
@@ -73,13 +79,22 @@ def createGET():
 def search():
     key1=request.values.get("key1")
     value1=request.values.get("value1")
+    if(request.values.get("dataType1") == "double"):
+        value1 = float(value1)
+    op = request.values.get("operation")
     # key2=request.values.get("key2")
     # value2=request.values.get("value2")
     # key3=request.values.get("key3")
     # value3=request.values.get("value3")
     # entry = {key1:value1, key2:value2, key3:value3}
-    entry = {key1:value1}
-    results = db.ImageEntry.find(entry)
+    if op == "eq":
+        entry = {key1:value1}
+        results = db.ImageEntry.find(entry)
+    elif op == "gt":
+        print({key1:{"$gt":value1}})
+        results = db.ImageEntry.find({key1:{"$gt":value1}})
+    else :
+        results = db.ImageEntry.find({key1:{"$lt":value1}})
     # for result in results:
     #     # target = os.path.join(APP_ROOT,'images/')
     #     # destination = "".join([target, result.get('name')])
