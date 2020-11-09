@@ -105,9 +105,11 @@ def authenticate():
 def loginPage():
     return render_template('loginPage.html')
 
-@app.route('/logout', methods=['POST'])
+@app.route('/logout', methods=['POST', 'GET'])
 def logout():
     logout_user()
+    session.pop('yourkey', None)
+    return render_template('loginPage.html')
 
 @app.route("/remove")
 @login_required  

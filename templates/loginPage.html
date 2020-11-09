@@ -41,7 +41,7 @@
     }
 
     img.avatar {
-    width: 40%;
+    width: 10%;
     border-radius: 50%;
     }
 
@@ -72,7 +72,7 @@
 
 <form action="/authenticate" method="POST">
   <div class="imgcontainer">
-    <img src="./img_avatar2.png" alt="Avatar" class="avatar">
+    <img src="{{ url_for('static',filename = 'img_avatar2.png') }} " alt="Avatar" class="avatar">
   </div>
 
   <div class="container">
